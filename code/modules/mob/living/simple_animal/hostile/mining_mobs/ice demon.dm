@@ -21,7 +21,6 @@
 	maxHealth = 150
 	health = 150
 	obj_damage = 40
-	environment_smash = ENVIRONMENT_SMASH_MINERALS
 	melee_damage_lower = 15
 	melee_damage_upper = 15
 	attack_verb_continuous = "slices"
@@ -65,12 +64,6 @@
 	SLEEP_CHECK_DEATH(8)
 	return ..()
 
-/mob/living/simple_animal/hostile/asteroid/ice_demon/Life()
-	. = ..()
-	if(!. || target)
-		return
-	adjustHealth(-maxHealth*0.025)
-
 /mob/living/simple_animal/hostile/asteroid/ice_demon/death(gibbed)
 	move_force = MOVE_FORCE_DEFAULT
 	move_resist = MOVE_RESIST_DEFAULT
@@ -108,7 +101,6 @@
 	maxHealth = 300
 	health = 300
 	obj_damage = 100
-	environment_smash = ENVIRONMENT_SMASH_MINERALS
 	melee_damage_lower = 25
 	melee_damage_upper = 25
 	attack_verb_continuous = "cleaves"
@@ -154,12 +146,6 @@
 	do_teleport(src, end, 0,  channel=TELEPORT_CHANNEL_BLUESPACE, forced = TRUE)
 	SLEEP_CHECK_DEATH(8)
 	return ..()
-
-/mob/living/simple_animal/hostile/asteroid/ice_demon/Life()
-	. = ..()
-	if(!. || target)
-		return
-	adjustHealth(-maxHealth*0.025)
 
 /mob/living/simple_animal/hostile/asteroid/old_demon/death(gibbed)
 	move_force = MOVE_FORCE_DEFAULT

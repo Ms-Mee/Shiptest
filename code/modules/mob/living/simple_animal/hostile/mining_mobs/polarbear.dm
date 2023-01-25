@@ -15,7 +15,6 @@
 	maxHealth = 200
 	health = 200
 	obj_damage = 40
-	environment_smash = ENVIRONMENT_SMASH_MINERALS
 	melee_damage_lower = 25
 	melee_damage_upper = 25
 	attack_verb_continuous = "claws"
@@ -45,13 +44,6 @@
 	rapid_melee = 2
 	speed = 7
 	move_to_delay = 7
-
-/mob/living/simple_animal/hostile/asteroid/polarbear/Life()
-	. = ..()
-	if(target)
-		return
-	adjustHealth(-maxHealth*0.025)
-	aggressive_message_said = FALSE
 
 /mob/living/simple_animal/hostile/asteroid/polarbear/death(gibbed)
 	move_force = MOVE_FORCE_DEFAULT

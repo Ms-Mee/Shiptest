@@ -57,6 +57,16 @@
 	desc = "A fancy bicorne used by generals of the Colonial Minutemen."
 	icon_state = "minuteman_general_hat"
 
+/obj/item/clothing/head/caphat/frontier
+	name = "\improper Frontiersmen commander's cap"
+	desc = "An imposing peaked cap, meant for a commander of the Frontiersmen."
+	icon_state = "frontier_cap"
+
+/obj/item/clothing/head/caphat/frontier/admiral
+	name = "\improper Frontiersmen admiral's cap"
+	desc = "An imposing peaked cap meant for only the highest of officers of the Frontiersman pirate fleet."
+	icon_state = "frontier_admiral_cap"
+
 //Head of Personnel
 /obj/item/clothing/head/hopcap
 	name = "head of personnel's cap"
@@ -157,6 +167,27 @@
 	name = "colonial minutmen officer's slouch hat"
 	desc = "A commanding slouch hat adorned with a offier's badge, used by the Colonial Minutemen."
 	icon_state = "minuteman_officer_hat"
+
+
+/obj/item/clothing/head/cowboy/sec/roumain
+	name = "hunter's hat"
+	desc = "A fancy hat with a nice feather. The way it covers your eyes makes you feel like a badass."
+	icon_state = "rouma_hat"
+
+/obj/item/clothing/head/cowboy/sec/roumain/shadow
+	name = "shadow's hat"
+	desc = "A rough, simple hat. The way it covers your eyes makes you feel badass, but you just look like a wannabe hunter."
+	icon_state = "rouma_shadow_hat"
+
+/obj/item/clothing/head/cowboy/sec/roumain/med
+	name = "medical hunter's hat"
+	desc = "A very wide-brimmed, round hat treated with oil and wax. Somehow manages to look stylish and creepy at the same time."
+	icon_state = "rouma_med_hat"
+
+/obj/item/clothing/head/HoS/cowboy/montagne
+	name = "montagne's hat"
+	desc = "A very fancy hat with a large feather plume to signal that you are, in fact, a Hunter Montagne. The exotic fur lining is impeccably soft and bafflingly bulletproof."
+	icon_state = "rouma_montagne_hat"
 
 /obj/item/clothing/head/HoS/syndicate
 	name = "syndicate cap"
