@@ -233,7 +233,7 @@
 	gain_text = "<span class='notice'>Your blood is accursed, feed on others lest you become dry and fall apart, however your blood is also helpful to others which are not vampires, and you may gift them, careful for them not to become like you.</span>"
 	lose_text = "<span class='notice'>You feel blessed, your blood no longer cursed.</span>"
 	medical_record_text = "Patient is a vampire."
-	allowed_species = list("fly" = "fly", "human" = "human", "moth" = "moth", "felinid" = "felinid", "lizard" = "lizard")
+	species_lock = TRAIT_SPECIES_BLACKLIST(SPECIES_IPC, SPECIES_JELLYPERSON, SPECIES_PLASMAMAN, SPECIES_ETHEREAL, SPECIES_VAMPIRE) //No.
 	mob_traits = list(TRAIT_NOBREATH, TRAIT_NOHUNGER)
 	var/old_blood
 	var/datum/action/vampire_quirk_drain/VA

@@ -1271,7 +1271,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			var/datum/quirk/quirk_datum = SSquirks.quirks[quirk_index]
 			var/has_quirk
 			var/quirk_cost = initial(quirk_datum.value)
-			var/list/allowed_species = Test.allowed_species
 			for(var/quirk_owned in all_quirks)
 				if(quirk_owned == initial(quirk_datum.name))
 					has_quirk = TRUE
