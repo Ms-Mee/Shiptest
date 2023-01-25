@@ -34,7 +34,10 @@ All ShuttleMove procs go here
 				M.visible_message("<span class='warning'>[shuttle] slams into [M]!</span>")
 				SSblackbox.record_feedback("tally", "shuttle_gib", 1, M.type)
 				log_attack("[key_name(M)] was shuttle gibbed by [shuttle].")
-				M.gib()
+				if(isanimal(M))
+					qdel(M)
+				else
+					M.gib()
 
 
 		else //non-living mobs shouldn't be affected by shuttles, which is why this is an else
@@ -72,6 +75,8 @@ All ShuttleMove procs go here
 	return TRUE
 
 /turf/proc/lateShuttleMove(turf/oldT)
+	blocks_air = initial(blocks_air)
+	oldT.blocks_air = initial(oldT.blocks_air)
 	AfterChange(CHANGETURF_RECALC_ADJACENT)
 	oldT.AfterChange(CHANGETURF_RECALC_ADJACENT)
 
@@ -94,8 +99,7 @@ All ShuttleMove procs go here
 	if(loc != oldT) // This is for multi tile objects
 		return
 
-	loc = newT
-
+	abstract_move(newT)
 
 	return TRUE
 
@@ -266,14 +270,6 @@ All ShuttleMove procs go here
 		GLOB.deliverybeacons += src
 		GLOB.deliverybeacontags += location
 
-/obj/machinery/mineral/beforeShuttleMove(turf/newT, rotation, move_mode, obj/docking_port/mobile/moving_dock)
-	unregister_input_turf()
-	return ..()
-
-/obj/machinery/mineral/afterShuttleMove(turf/oldT, list/movement_force, shuttle_dir, shuttle_preferred_direction, move_dir, rotation)
-	. = ..()
-	register_input_turf()
-
 /************************************Item move procs************************************/
 
 /obj/item/storage/pod/afterShuttleMove(turf/oldT, list/movement_force, shuttle_dir, shuttle_preferred_direction, move_dir, rotation)
@@ -281,7 +277,7 @@ All ShuttleMove procs go here
 	// If the pod was launched, the storage will always open. The reserved_level check
 	// ignores the movement of the shuttle from the transit level to
 	// the station as it is loaded in.
-	if (oldT && !is_reserved_level(oldT.z))
+	if (oldT && !is_reserved_level(oldT))
 		unlocked = TRUE
 
 /************************************Mob move procs************************************/

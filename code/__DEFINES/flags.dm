@@ -18,8 +18,6 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 
 //FLAGS BITMASK
 
-/// This flag is what recursive_hear_check() uses to determine wether to add an item to the hearer list or not.
-#define HEAR_1 (1<<3)
 /// conducts electricity (metal etc.)
 #define CONDUCT_1 (1<<5)
 /// For machines and structures that should not break into parts, eg, holodeck stuff
@@ -43,6 +41,10 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 #define RAD_PROTECT_CONTENTS_1 (1 << 17)
 /// should this object be allowed to be contaminated
 #define RAD_NO_CONTAMINATE_1 (1 << 18)
+///Use when this shouldn't be obscured by large icons, like trees.
+#define SHOW_BEHIND_LARGE_ICONS_1 (1<<12)
+/// Should we use the initial icon for display? Mostly used by overlay only objects
+#define HTML_USE_INITAL_ICON_1 (1<<20)
 
 /// If the thing can reflect light (lasers/energy)
 #define RICOCHET_SHINY (1<<0)
@@ -51,15 +53,12 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 
 //turf-only flags
 #define NOJAUNT_1 (1<<0)
-#define UNUSED_RESERVATION_TURF_1 (1<<1)
 /// If a turf can be made dirty at roundstart. This is also used in areas.
-#define CAN_BE_DIRTY_1 (1<<2)
-/// If blood cultists can draw runes or build structures on this turf
-#define CULT_PERMITTED_1 (1<<3)
+#define CAN_BE_DIRTY_1 (1<<1)
 /// Blocks lava rivers being generated on the turf
-#define NO_LAVA_GEN_1 (1<<6)
+#define NO_LAVA_GEN_1 (1<<3)
 /// Blocks ruins spawning on the turf
-#define NO_RUINS_1 (1<<10)
+#define NO_RUINS_1 (1<<4)
 
 ////////////////Area flags\\\\\\\\\\\\\\
 /// If it's a valid territory for cult summoning or the CRAB-17 phone to spawn

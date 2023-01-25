@@ -4,12 +4,6 @@
 	else
 		return "[pick(GLOB.lizard_names_female)]-[pick(GLOB.lizard_names_female)]"
 
-/proc/ethereal_name()
-	var/tempname = "[pick(GLOB.ethereal_names)] [random_capital_letter()]"
-	if(prob(65))
-		tempname += random_capital_letter()
-	return tempname
-
 /proc/plasmaman_name()
 	return "[pick(GLOB.plasmaman_names)] \Roman[rand(1,99)]"
 
@@ -20,8 +14,10 @@
 	return "[pick(GLOB.squid_names)][pick("-", "", " ")][capitalize(pick(GLOB.squid_names) + pick(GLOB.squid_names))]"
 
 /proc/kepori_name()
-	var/name = "[pick(list("Ren", "Ran", "Kha", "Rha", "Jes", "Nes", "Nez", "Jas", "Eij", "Eik", "Hal", "Kal", "Ral", "Tal", "N", "K", "R", "Ein", "Nah", "Na", "Kaz", "Kas", "Eil", "Eit"))]"
-	return name + "[pick(list("an", "un", "ali", "oli", "uli", "ami", "omi", "umi", "ani", "uni", "uno", "uko", "a", "i", "o", "ala", "aka", "ako", "aku", "yo", "yu", "ii"))]"
+	var/first_syllables = list("Fa", "Fe", "Fi", "Ma", "Me", "Mi", "Na", "Ne", "Ni", "Sa", "Se", "Si", "Ta", "Te", "Ti")
+	var/second_syllables = list("fa", "fe", "fi", "la", "le", "li", "ma", "me", "mi", "na", "ne", "ni", "ra", "re", "ri", "sa", "se", "si", "sha", "she", "shi", "ta", "te", "ti")
+	var/third_syllables = list("ca", "ce", "ci", "fa", "fe", "fi", "la", "le", "li", "ma", "me", "mi", "na", "ne", "ni", "ra", "re", "ri", "sa", "se", "si", "sha", "she", "shi", "ta", "te", "ti")
+	return "[pick(first_syllables)][pick(second_syllables)][pick(third_syllables)]"
 
 GLOBAL_VAR(command_name)
 /proc/command_name()

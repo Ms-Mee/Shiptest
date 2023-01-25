@@ -107,7 +107,7 @@
 	if(next_check < world.time)
 		if(!current_wizard)
 			for(var/mob/living/L in GLOB.player_list)
-				if(L.get_virtual_z_level() == src.get_virtual_z_level() && L.stat != DEAD && !(faction in L.faction))
+				if(L.virtual_z() == src.virtual_z() && L.stat != DEAD && !(faction in L.faction))
 					summon_wizard()
 					break
 		else
@@ -221,7 +221,7 @@
 		user.dropItemToGround(src)
 
 
-/obj/item/dice/d20/fate/proc/effect(var/mob/living/carbon/human/user,roll)
+/obj/item/dice/d20/fate/proc/effect(mob/living/carbon/human/user,roll)
 	var/turf/T = get_turf(src)
 	switch(roll)
 		if(1)

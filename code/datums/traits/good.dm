@@ -42,20 +42,21 @@
 	// Whitesands Start - Prevent Prosthetic healing from liquor
 	switch(C.drunkenness)
 		if (6 to 40)
-			C.adjustBruteLoss(-0.1, FALSE, FALSE, BODYPART_ORGANIC)
-			C.adjustFireLoss(-0.05, FALSE, FALSE, BODYPART_ORGANIC)
+			C.adjustBruteLoss(-0.1, FALSE, FALSE, BODYTYPE_ORGANIC)
+			C.adjustFireLoss(-0.05, FALSE, FALSE, BODYTYPE_ORGANIC)
 		if (41 to 60)
-			C.adjustBruteLoss(-0.4, FALSE, FALSE, BODYPART_ORGANIC)
-			C.adjustFireLoss(-0.2, FALSE, FALSE, BODYPART_ORGANIC)
+			C.adjustBruteLoss(-0.4, FALSE, FALSE, BODYTYPE_ORGANIC)
+			C.adjustFireLoss(-0.2, FALSE, FALSE, BODYTYPE_ORGANIC)
 		if (61 to INFINITY)
-			C.adjustBruteLoss(-0.8, FALSE, FALSE, BODYPART_ORGANIC)
-			C.adjustFireLoss(-0.4, FALSE, FALSE, BODYPART_ORGANIC)
+			C.adjustBruteLoss(-0.8, FALSE, FALSE, BODYTYPE_ORGANIC)
+			C.adjustFireLoss(-0.4, FALSE, FALSE, BODYTYPE_ORGANIC)
 	// Whitesands End - Prevent Prosthetic healing from liquor
 
 /datum/quirk/empath
 	name = "Empath"
 	desc = "Whether it's a sixth sense or careful study of body language, it only takes you a quick glance at someone to understand how they feel."
 	value = 2
+	mood_quirk = TRUE
 	mob_traits = list(TRAIT_EMPATH)
 	gain_text = "<span class='notice'>You feel in tune with those around you.</span>"
 	lose_text = "<span class='danger'>You feel isolated from others.</span>"

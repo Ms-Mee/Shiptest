@@ -117,7 +117,7 @@
 // -----------------------------
 /obj/item/storage/secure/briefcase
 	name = "secure briefcase"
-	icon = 'whitesands/icons/obj/storage.dmi' //WS edit - better briefcases
+	icon = 'icons/obj/storage.dmi' //WS edit - better briefcases
 	icon_state = "secure"
 	item_state = "sec-case"
 	lefthand_file = 'icons/mob/inhands/equipment/briefcase_lefthand.dmi'
@@ -139,6 +139,7 @@
 	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
 	STR.max_combined_w_class = 21
 	STR.max_w_class = WEIGHT_CLASS_NORMAL
+	STR.use_sound = 'sound/items/storage/briefcase.ogg'
 
 //Syndie variant of Secure Briefcase. Contains space cash, slightly more robust.
 /obj/item/storage/secure/briefcase/syndie

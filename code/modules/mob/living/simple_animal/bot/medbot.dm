@@ -22,8 +22,7 @@
 
 	status_flags = (CANPUSH | CANSTUN)
 
-	radio_key = /obj/item/encryptionkey/headset_med
-	radio_channel = RADIO_CHANNEL_MEDICAL
+	radio_key = /obj/item/encryptionkey
 
 	bot_type = MED_BOT
 	model = "Medibot"
@@ -429,7 +428,7 @@
 	var/can_inject = FALSE
 	for(var/X in C.bodyparts)
 		var/obj/item/bodypart/part = X
-		if(part.status == BODYPART_ORGANIC)
+		if(IS_ORGANIC_LIMB(part))
 			can_inject = TRUE
 	if(!can_inject)
 		return 0

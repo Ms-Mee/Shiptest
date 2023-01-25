@@ -42,7 +42,7 @@
 /area/whitesands/surface/outdoors)
 "n" = (
 /obj/structure/table,
-/obj/item/gun/ballistic/automatic/aks74u,
+/obj/item/gun/ballistic/automatic/smg/aks74u,
 /obj/item/ammo_box/magazine/aks74u,
 /turf/open/floor/plating/asteroid/whitesands/dried,
 /area/whitesands/surface/outdoors)
@@ -142,7 +142,7 @@
 /turf/open/floor/plating/asteroid/whitesands/dried,
 /area/whitesands/surface/outdoors)
 "J" = (
-/obj/structure/sign/poster/contraband/communist_state,
+/obj/structure/sign/poster/contraband/gec,
 /turf/closed/wall/mineral/sandstone,
 /area/whitesands/surface/outdoors)
 "M" = (

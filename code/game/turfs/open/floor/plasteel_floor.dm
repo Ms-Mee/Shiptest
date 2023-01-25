@@ -1,5 +1,5 @@
 /turf/open/floor/plasteel
-	icon = 'whitesands/icons/turf/floors/tiles.dmi'
+	icon = 'icons/turf/floors/tiles.dmi'
 	color = COLOR_FLOORTILE_GRAY
 	base_icon_state = "tiled"
 	icon_state = "tiled"
@@ -51,7 +51,7 @@
 	color = COLOR_WHITE
 
 /turf/open/floor/plasteel/tech
-	icon = 'whitesands/icons/turf/floors/techfloor.dmi'
+	icon = 'icons/turf/floors/techfloor.dmi'
 	icon_state = "techfloor_gray"
 	base_icon_state = "techfloor_gray"
 	floor_tile = /obj/item/stack/tile/plasteel/tech
@@ -86,7 +86,7 @@
 	base_icon_state = "ridged"
 
 /turf/open/floor/plasteel/showroomfloor
-	icon = 'whitesands/icons/turf/floors.dmi'
+	icon = 'icons/turf/floors.dmi'
 	icon_state = "showroomfloor"
 	base_icon_state = "showroomfloor"
 
@@ -104,7 +104,7 @@
 
 /turf/open/floor/plasteel/freezer
 	color = null
-	icon = 'whitesands/icons/turf/floors.dmi'
+	icon = 'icons/turf/floors.dmi'
 	icon_state = "freezer"
 	base_icon_state = "freezer"
 
@@ -114,7 +114,7 @@
 
 /turf/open/floor/plasteel/kitchen_coldroom
 	name = "cold room floor"
-	icon = 'whitesands/icons/turf/floors.dmi'
+	icon = 'icons/turf/floors.dmi'
 	initial_gas_mix = KITCHEN_COLDROOM_ATMOS
 
 /turf/open/floor/plasteel/kitchen_coldroom/freezerfloor //tempted to make this a subset of freezer
@@ -124,7 +124,7 @@
 
 /turf/open/floor/plasteel/grimy
 	color = null
-	icon = 'whitesands/icons/turf/floors.dmi'
+	icon = 'icons/turf/floors.dmi'
 	icon_state = "lino"
 	base_icon_state = "lino"
 	tiled_dirt = FALSE
@@ -182,7 +182,7 @@
 /turf/open/floor/plasteel/rockvault
 	icon_state = "rockvault"
 	base_icon_state = "rockvault"
-	icon = 'whitesands/icons/turf/floors/misc.dmi'
+	icon = 'icons/turf/floors/misc.dmi'
 
 /turf/open/floor/plasteel/rockvault/alien
 	icon_state = "alienvault"
@@ -194,7 +194,7 @@
 
 
 /turf/open/floor/plasteel/elevatorshaft
-	icon = 'whitesands/icons/turf/floors.dmi'
+	icon = 'icons/turf/floors.dmi'
 	icon_state = "elevatorshaft"
 	base_icon_state = "elevatorshaft"
 	color = null
@@ -207,3 +207,58 @@
 
 /turf/open/floor/plasteel/sepia
 	color = "#938170"
+
+/turf/open/floor/plasteel/icecropolis
+	baseturfs = /turf/open/indestructible/necropolis/air
+
+/*
+*
+*
+*	Medians
+*		Mostly for show, adds floor transitions so things look alot less boxy
+*
+*/
+/turf/open/floor/plasteel/median
+	icon = 'icons/turf/floors/medians.dmi'
+	icon_state = "floor_fuckywucky"
+	name = "Uh oh tile"
+
+/turf/open/floor/plasteel/median/floortogrime
+	icon_state = "FG-half"
+	name = "floor"
+
+/turf/open/floor/plasteel/median/floortogrime/corner
+	icon_state = "FG-corner"
+
+/turf/open/floor/plasteel/median/floortogrime/fullcorner
+	icon_state = "FG-fullcorner"
+
+/turf/open/floor/plasteel/median/whitetodark
+	icon_state = "WD-half"
+	name = "floor"
+
+/turf/open/floor/plasteel/median/whitetodark/corner
+	icon_state = "WD-corner"
+
+/turf/open/floor/plasteel/median/whitetodark/fullcorner
+	icon_state = "WD-fullcorner"
+
+/turf/open/floor/plasteel/median/darktogrime
+	icon_state = "DG-half"
+	name = "floor"
+
+/turf/open/floor/plasteel/median/darktogrime/corner
+	icon_state = "DG-corner"
+
+/turf/open/floor/plasteel/median/darktogrime/fullcorner
+	icon_state = "DG-fullcorner"
+
+/turf/open/floor/plasteel/median/whitetogrime
+	icon_state = "WG-half"
+	name = "floor"
+
+/turf/open/floor/plasteel/median/whitetogrime/corner
+	icon_state = "WG-corner"
+
+/turf/open/floor/plasteel/median/whitetogrime/fullcorner
+	icon_state = "WG-fullcorner"
