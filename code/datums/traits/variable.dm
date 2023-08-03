@@ -1,5 +1,5 @@
 // This file has quirks with variable values, their value varies based on which options the user has taken.
-// Value for each option will default to the quirk's base value if none is specified. This is currently unimplemented. Quirks with variable POSITIVE values is also unimplemented.
+// Value for each option will default to the quirk's base value if none is specified.
 
 /datum/quirk/phobia
 	name = "Phobia"

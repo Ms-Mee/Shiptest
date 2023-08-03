@@ -10,10 +10,14 @@ PROCESSING_SUBSYSTEM_DEF(quirks)
 	wait = 10
 	runlevels = RUNLEVEL_GAME
 
-	var/list/quirks = list()		//Assoc. list of all roundstart quirk datum types; "name" = /path/
-	var/list/quirk_points = list()	//Assoc. list of quirk names and their "point cost"; positive numbers are good traits, and negative ones are bad
-	var/list/quirk_objects = list()	//A list of all quirk objects in the game, since some may process
-	var/list/quirk_blacklist = list() //A list a list of quirks that can not be used with each other. Format: list(quirk1,quirk2),list(quirk3,quirk4)
+	///Assoc. list of all roundstart quirk datum types; "name" = /path/
+	var/list/quirks = list()
+	///Assoc. list of quirk names and their "point cost"; positive numbers are good traits, and negative ones are bad
+	var/list/quirk_points = list()
+	///A list of all quirk objects in the game, since some may process
+	var/list/quirk_objects = list()
+	///A list a list of quirks that can not be used with each other. Format: list(quirk1,quirk2),list(quirk3,quirk4)
+	var/list/quirk_blacklist = list()
 	///List of id-based locks for species, use either TRAIT_SPECIES_WHITELIST or TRAIT_SPECIES_BLACKLIST inputting the species ids to said macros. Example: species_lock = TRAIT_SPECIES_WHITELIST(SPECIES_IPC, SPECIES_MOTH)
 	var/list/quirk_species_locks = list()
 	var/list/quirk_customizations = list()

@@ -855,13 +855,13 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 							else
 								equipped_gear.Cut(i,i+1)
 
-					dat += "<table align='center' width='100%'>"
-					dat += "<tr><td colspan=5><center><b>Current loadout usage: [length(equipped_gear)]/[CONFIG_GET(number/max_loadout_items)]</b> \[<a href='?_src_=prefs;preference=gear;clear_loadout=1'>Clear Loadout</a>\] | \[<a href='?_src_=prefs;preference=gear;toggle_loadout=1'>Toggle Loadout</a>\]</center></td></tr>"
+					dat += "<div><div style='overflow-y:scroll;height=80px'><table align='center' width='100%' height='100px' style='background-color:#2A2A2A;overflow-y:scroll'>"
+					dat += "<tr><td colspan=5><center><b>Current loadout balance: [CONFIG_GET(number/max_loadout_balance) - get_loadout_balance()]/[CONFIG_GET(number/max_loadout_balance)]</b> \[<a href='?_src_=prefs;preference=gear;clear_loadout=1'>Clear Loadout</a>\] | \[<a href='?_src_=prefs;preference=gear;toggle_loadout=1'>Toggle Loadout</a>\]</center></td></tr>"
 					dat += "<tr><td colspan=5><center><b>"
 
 					var/firstcat = 1
 					var/list/slot_list = list("No Slot", "Neck", "Hands", "Face", "Eyes", "Feet", "Head", "Clothes", "Outer Clothes")
-					dat+= "<a href='?_src_=prefs;preference=gear;change_slot=["Invert"]'>Invert Slots</a>"
+					dat+= "<a href='?_src_=prefs;preference=gear;change_slot=["Invert"]' title='Click here!!'>Invert Slots</a>"
 					dat+= " | <a href='?_src_=prefs;preference=gear;change_slot=["Disable"]'>Disable All Slots</a>"
 					for(var/slot in slot_list)
 						if(firstcat)
@@ -883,7 +883,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					for(var/category in gear_tags)
 						var/datum/loadout_category/LC = GLOB.loadout_categories[category]
 						if(LC)
-							gear_to_display += LC.gear
+							gear_to_display |= LC.gear
 						else
 							gear_tags -= category
 							if(!length(gear_tags))
@@ -895,7 +895,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					dat += "<td><b>Limit</b></td>"
 					dat += "<tr><td colspan=5><hr></td></tr>"
 					dat += handle_loadout_display(gear_to_display)
-					dat += "</table>"
+					dat += "</table></div>"
 
 				if(3)
 					if(!SSquirks.quirks.len)
@@ -905,16 +905,17 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						dat += "<table align='center' width='100%'>"
 						var/list/quirk_conflicts = check_quirk_compatibility(user)
 						dat += "<tr><center><b>Current positive quirk usage: [GetPositiveQuirkCount()] / [MAX_QUIRKS]</b> \[<a href='?_src_=prefs;preference=quirk;task=reset'>Reset Quirks</a>\]</center></tr>"
-						dat += "<tr><center><b>Quirk balance remaining:</b> [GetQuirkBalance()]</center></tr>"
+						dat += "<tr><center><b>Quirk balance remaining:</b> [get_quirk_balance()]</center></tr>"
 						dat += "<tr><center><b>Current quirks:</b> [all_quirks.len ? all_quirks.Join(", ") : "None"]</center></tr>"
 						dat+= "</table>"
-						dat += "<table align='center'; width='100%'; style='background-color:#201f27'>"
+						dat += "<table align='center'; width='100%'; style='background-color:#2A2A2A'>"
 						var/section_handle = 0
 						for(var/quirk_index in SSquirks.quirks)
 							var/datum/quirk/quirk_datum = SSquirks.quirks[quirk_index]
 							var/has_quirk
 							var/quirk_handled
 							var/quirk_cost = SSquirks.quirk_points[quirk_index]
+							var/quirk_dynamic_cost
 							if((section_handle == 0 && quirk_cost > 0) || (section_handle == 1 && quirk_cost < 0) || (section_handle == 2 && quirk_cost == 0))
 								section_handle++
 								switch(section_handle)
@@ -934,14 +935,26 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 							for(var/quirk_owned in all_quirks)
 								if(quirk_owned == quirk_index)
 									has_quirk = TRUE
+							if(quirk_index in SSquirks.quirk_customizations)
+								quirk_dynamic_cost = get_dynamic_quirk_value(quirk_index)
+							var/load_dynamic_cost = (quirk_dynamic_cost || quirk_dynamic_cost == 0)
 							if(!has_quirk)
 								quirk_cost *= -1
-							var/font_color = "#AAAAFF"
+								if(load_dynamic_cost)
+									quirk_dynamic_cost *= -1
+							var/cost_font_color = "#AAAAFF"
+							var/dynamic_cost_color = "#AAAAFF"
 							if(quirk_cost != 0)
-								font_color = quirk_cost > 0 ? "#AAFFAA" : "#FFAAAA"
+								cost_font_color = quirk_cost > 0 ? "#AAFFAA" : "#FFAAAA"
+							if((quirk_dynamic_cost != 0) && load_dynamic_cost)
+								dynamic_cost_color = quirk_dynamic_cost > 0 ? "#AAFFAA" : "#FFAAAA"
 							if(quirk_cost > 0)
 								quirk_cost = "+[quirk_cost]"
-							dat += "<tr style='vertical-align:top;background-color:#302e3a;'><td width=20%><center>"
+							if((quirk_dynamic_cost > 0) && load_dynamic_cost)
+								quirk_dynamic_cost = "+[quirk_dynamic_cost]"
+							quirk_cost = "<font color='[cost_font_color]'>[quirk_cost]</font_color>"
+							quirk_dynamic_cost = "<font color='[dynamic_cost_color]'>([quirk_dynamic_cost])</font_color>"
+							dat += "<tr style='vertical-align:top;background-color:#373737;'><td width=20%><center>"
 							if(quirk_conflicts[quirk_index])
 								if(!has_quirk)
 									dat += "<a style='white-space:normal;' class=linkOff>[quirk_index]</a>"
@@ -982,7 +995,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 										dat += "<a href='?_src_=prefs;preference=quirk;task=customize_quirk;quirk=[quirk_index];value=[quirk_preference_index];type=edit;options=[possible_options.Join(", ")]'>[quirk_preferences[quirk_preference_index]]</a>"
 							dat += "</td><td style='vertical-align:middle;'><center>"
 							dat += "<font size=2>"
-							dat += "<font color='[font_color]'>[quirk_cost]</font_color>"
+							dat += "[quirk_cost] [load_dynamic_cost ? "[quirk_dynamic_cost]" : ""]"
 							dat += "</font>"
 							dat += "</center></td><td style='vertical-align:middle;'><center>"
 							if(length(quirk_restrictions))
@@ -1328,7 +1341,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 /datum/preferences/proc/get_loadout_balance()
 	. = 0
 	for(var/loadout_equipped_entry in equipped_gear)
-		for(var/i = 0, i < equipped_gear_preferences[loadout_equipped_entry]["amount"], i++)
+		for(var/i = 0, i < ("amount" in equipped_gear_preferences[loadout_equipped_entry] ? equipped_gear_preferences[loadout_equipped_entry]["amount"] : 1), i++)
 		var/datum/gear/entry_datum = GLOB.gear_datums[loadout_equipped_entry]
 		. += initial(entry_datum.cost)
 
@@ -1357,7 +1370,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			if(ITEM_SLOT_MASK)
 				slot = "Face"
 		if((!slot && ("No Slot" in gear_display_slots)) || (slot in gear_display_slots))
-			dat += "<tr style='vertical-align:top;'><td width=20%><a style='white-space:normal;' [(G.display_name in equipped_gear) ? "class='linkOn' " : ""]href='?_src_=prefs;preference=gear;toggle_gear=[G.display_name]'>[G.display_name] </a>"
+			dat += "<tr style='vertical-align:top;background-color:#373737;'><td width=20%'><a style='white-space:normal;' [(G.display_name in equipped_gear) ? "class='linkOn' " : ""]href='?_src_=prefs;preference=gear;toggle_gear=[G.display_name]'>[G.display_name] </a>"
 			if(G.limit > 1)
 				dat += "<a style='white-space:normal;' [(G.display_name in equipped_gear) ? "class='linkOn' " : ""]href='?_src_=prefs;preference=gear;add_gear=[G.display_name]'> + </a>"
 				dat += "<a style='white-space:normal;' [(G.display_name in equipped_gear) ? "class='linkOn' " : ""]href='?_src_=prefs;preference=gear;remove_gear=[G.display_name]'> - </a>"
@@ -1431,7 +1444,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 /datum/preferences/proc/handle_quirk_conflict(change_type, additional_argument, mob/user)
 	var/list/all_quirks_new = list()
 	all_quirks_new += all_quirks
-	var/balance = GetQuirkBalance()
+	var/balance = get_quirk_balance()
 	var/datum/species/target_species
 	if(change_type == "species")
 		if(additional_argument)
@@ -1466,9 +1479,9 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		var/counter = 1
 		while(balance < 0)
 			var/datum/quirk/positive_quirk = positive_quirks[counter]
-			if(balance >= initial(positive_quirk.value) || (balance < initial(positive_quirk.value) && counter == length(positive_quirks)))
+			if(balance >= SSquirks.quirk_points[positive_quirk] || (balance < SSquirks.quirk_points[positive_quirk] && counter == length(positive_quirks)))
 				all_quirks_new -= initial(positive_quirk.name)
-				balance += initial(positive_quirk.value)
+				balance += SSquirks.quirk_points[positive_quirk]
 				positive_quirks -= positive_quirk
 				counter = counter == 1 ? 1 : counter - 1
 			else
@@ -1517,16 +1530,25 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 	return quirk_restrictions
 
-/datum/preferences/proc/GetQuirkBalance()
-	var/bal = 0
-	for(var/V in all_quirks)
-		var/datum/quirk/T = SSquirks.quirks[V]
-		bal -= initial(T.value)
-		if(V in SSquirks.quirk_customizations)
-			for(var/quirk_preference_index in SSquirks.quirk_customizations[V])
+/datum/preferences/proc/get_quirk_balance()
+	var/balance = 0
+	for(var/quirk_owned in all_quirks)
+		balance -= SSquirks.quirk_points[quirk_owned]
+		if(quirk_owned in SSquirks.quirk_customizations)
+			for(var/quirk_preference_index in SSquirks.quirk_customizations[quirk_owned])
 				for(var/quirk_option in quirk_preferences[quirk_preference_index])
-					bal -= (SSquirks.quirk_customization_options[quirk_preference_index][quirk_option]["value"] / 2)
-	return round(bal)
+					balance -= (SSquirks.quirk_customization_options[quirk_preference_index]["options"][quirk_option]["value"] / 2)
+	return round(balance)
+
+/datum/preferences/proc/get_dynamic_quirk_value(quirk_to_check)
+	var/value = 0
+	value -= initial(SSquirks.quirk_points[quirk_to_check])
+	if(quirk_to_check in SSquirks.quirk_customizations)
+		for(var/quirk_preference_index in SSquirks.quirk_customizations[quirk_to_check])
+			for(var/quirk_option in quirk_preferences[quirk_preference_index])
+				if(!isnull(quirk_option))
+					value -= (SSquirks.quirk_customization_options[quirk_preference_index]["options"][quirk_option]["value"] / 2)
+	return round(value) * -1
 
 /datum/preferences/proc/GetPositiveQuirkCount()
 	. = 0
@@ -1540,7 +1562,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	for(var/quirk_option in quirk_preferences[quirk_preference_index])
 		. += SSquirks.quirk_customization_options[quirk_preference_index]["options"][quirk_option]["cost"]
 		if(. > option_limit)
-			quirk_preferences[quirk_preferences] -= quirk_option
+			quirk_preferences[quirk_preference_index] -= quirk_option
 			. -= SSquirks.quirk_customization_options[quirk_preference_index]["options"][quirk_option]["cost"]
 			return
 
@@ -1641,7 +1663,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				if(!SSquirks.quirks[quirk])
 					return
 				var/value = SSquirks.quirk_points[quirk]
-				var/balance = GetQuirkBalance()
+				var/balance = get_quirk_balance()
 				if(quirk in all_quirks)
 					if(balance + value < 0)
 						to_chat(user, "<span class='warning'>Refunding this would cause you to go below your balance!</span>")
@@ -1669,8 +1691,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			if(TG.display_name in equipped_gear)
 				equipped_gear -= TG.display_name
 			else
-				if(length(equipped_gear) >= CONFIG_GET(number/max_loadout_items))
-					alert(user, "You can't have more than [CONFIG_GET(number/max_loadout_items)] items in your loadout!")
+				if(get_loadout_balance() >= CONFIG_GET(number/max_loadout_balance))
+					alert(user, "You can't have more than [CONFIG_GET(number/max_loadout_balance)] items in your loadout!")
 					return
 				var/list/type_blacklist = list()
 				var/list/slot_blacklist = list()

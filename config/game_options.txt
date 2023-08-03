@@ -465,6 +465,9 @@ ROUNDSTART_RACES jelly
 ## The amount of loadout items players are allowed to spawn with. Default 10
 MAX_LOADOUT_ITEMS 10
 
+## The value of loadout items players are allowed to spawn with. Default 50
+MAX_LOADOUT_BALANCE 50
+
 ##Overflow job. Default is assistant
 OVERFLOW_JOB Assistant
 

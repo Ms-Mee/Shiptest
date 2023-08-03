@@ -139,6 +139,10 @@
 	config_entry_value = 10
 	min_val = 0
 
+/datum/config_entry/number/max_loadout_balance	//maximum loadout balance, entirely replaces the config above
+	config_entry_value = 50
+	min_val = 0
+
 /datum/config_entry/flag/no_summon_guns	//No
 
 /datum/config_entry/flag/no_summon_magic	//Fun
