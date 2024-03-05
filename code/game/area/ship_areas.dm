@@ -77,6 +77,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	lighting_colour_bulb = "#ffe1c1"
 	area_limited_icon_smoothing = TRUE
 	sound_environment = SOUND_ENVIRONMENT_ROOM
+	lightswitch = FALSE
 	/// The mobile port attached to this area
 	var/obj/docking_port/mobile/mobile_port
 
@@ -111,6 +112,9 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 
 /area/ship/proc/link_to_shuttle(obj/docking_port/mobile/M)
 	mobile_port = M
+
+/area/ship/connect_to_shuttle(obj/docking_port/mobile/M)
+	link_to_shuttle(M)
 
 /area/ship/virtual_z()
 	if(mobile_port)
@@ -324,6 +328,10 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	name = "Armory"
 	icon_state = "armory"
 
+/area/ship/security/dock
+	name = "Shuttle Dock"
+	icon_state = "security"
+
 /// Cargo Bay ///
 /area/ship/cargo
 	name = "Cargo Bay"
@@ -342,6 +350,20 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 
 /area/ship/cargo/starboard
 	name = "Starboard Cargo Bay"
+
+/// Hangars ///
+
+/area/ship/hangar
+	name = "Hangar"
+	icon_state = "shuttlered"
+	sound_environment = SOUND_AREA_LARGE_ENCLOSED
+	ambientsounds = ENGINEERING
+
+/area/ship/hangar/port
+	name = "Port Hangar"
+
+/area/ship/hangar/starboard
+	name = "Starboard Hangar"
 
 /// Hallways ///
 /area/ship/hallway
@@ -421,5 +443,8 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 /// External Areas ///
 /area/ship/external
 	name = "External"
-	dynamic_lighting = DYNAMIC_LIGHTING_IFSTARLIGHT
 	icon_state = "space_near"
+	dynamic_lighting = DYNAMIC_LIGHTING_IFSTARLIGHT
+	ambientsounds = SPACE
+	sound_environment = SOUND_AREA_SPACE
+	lightswitch = TRUE

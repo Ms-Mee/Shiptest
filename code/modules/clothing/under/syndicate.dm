@@ -43,7 +43,7 @@
 	icon_state = "tactifool"
 	item_state = "bl_suit"
 	armor = list("melee" = 0, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 50, "acid" = 40)
-	supports_variations = DIGITIGRADE_VARIATION | KEPORI_VARIATION
+	supports_variations = DIGITIGRADE_VARIATION | VOX_VARIATION | KEPORI_VARIATION
 
 /obj/item/clothing/under/syndicate/tacticool/skirt
 	name = "tacticool skirtleneck"
@@ -52,7 +52,7 @@
 	item_state = "bl_suit"
 	armor = list("melee" = 0, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 50, "acid" = 40)
 	can_adjust = FALSE
-	supports_variations = DIGITIGRADE_VARIATION_NO_NEW_ICON | VOX_VARIATION | KEPORI_VARIATION
+	supports_variations = DIGITIGRADE_VARIATION_NO_NEW_ICON | KEPORI_VARIATION
 
 /obj/item/clothing/under/syndicate/sniper
 	name = "Tactical turtleneck suit"
@@ -69,14 +69,6 @@
 	icon_state = "camogreen"
 	item_state = "g_suit"
 	can_adjust = FALSE
-
-/obj/item/clothing/under/syndicate/soviet
-	name = "Ratnik 5 tracksuit"
-	desc = "Badly translated labels tell you to clean this in Vodka. Great for squatting in."
-	icon_state = "trackpants"
-	can_adjust = FALSE
-	armor = list("melee" = 10, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
-	resistance_flags = NONE
 
 /obj/item/clothing/under/syndicate/combat
 	name = "combat uniform"
@@ -97,20 +89,23 @@
 	name = "red polo and khaki pants"
 	desc = "A non-descript and slightly suspicious looking polo paired with a respectable yet also suspicious pair of khaki pants."
 	icon_state = "jake"
+	can_adjust = FALSE
 	armor = list("melee" = 10, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 50, "acid" = 40)
 	alt_covers_chest = TRUE
 
-/obj/item/clothing/under/syndicate/aclf
-	name = "2nd Battlegroup uniform"
-	desc = "A black uniform worn by the officers of the Gorlex Marauders 2nd Battlegroup."
-	icon_state = "aclf"
+/obj/item/clothing/under/syndicate/ngr/officer
+	name = "NGR officer uniform"
+	desc = "A black uniform worn by officers of the New Gorlex Republic."
+	icon_state = "ngr_officer"
+	can_adjust = FALSE
 	armor = list("melee" = 10, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 50, "acid" = 40)
 	alt_covers_chest = TRUE
 
-/obj/item/clothing/under/syndicate/aclfgrunt
-	name = "ACLF uniform"
-	desc = "A button-up in a tasteful shade of gray with red pants, used as the uniform of the Anti-Corporate Liberation front on the rim."
-	icon_state = "aclfgrunt"
+/obj/item/clothing/under/syndicate/ngr
+	name = "NGR uniform"
+	desc = "A button-up in a tasteful shade of gray with red pants, used as the basic uniform of the New Gorlex Republic."
+	icon_state = "ngr_grunt"
+	can_adjust = FALSE
 	armor = list("melee" = 0, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 50, "acid" = 40)
 	alt_covers_chest = TRUE
 
@@ -118,11 +113,19 @@
 	name = "Gorlex Marauder uniform"
 	desc = "Originally worn by the miners of the Gorlex VII colony, it is now donned by veteran Gorlex Marauders."
 	icon_state = "gorlex"
+	can_adjust = FALSE
 	armor = list("melee" = 10, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 50, "acid" = 40)
 	alt_covers_chest = TRUE
 	supports_variations = DIGITIGRADE_VARIATION | KEPORI_VARIATION
 
 /obj/item/clothing/under/syndicate/cybersun
+	name = "cybersun jumpsuit"
+	desc = "The standard jumpsuit used by the agents employed by Cybersun, in its distinctive half-black-half-white aesthetic."
+	icon_state = "cybersun_agent"
+	can_adjust = FALSE
+	alt_covers_chest = TRUE
+
+/obj/item/clothing/under/syndicate/cybersun/research
 	name = "Cybersun coveralls"
 	desc = "Nomex coveralls worn by workers and research personnel employed by Cybersun industries."
 	icon_state = "cybersun"
@@ -130,12 +133,20 @@
 	alt_covers_chest = TRUE
 	supports_variations = DIGITIGRADE_VARIATION | KEPORI_VARIATION
 
+/obj/item/clothing/under/syndicate/cybersun/officer
+	name = "cybersun officer's suit"
+	desc = "A crimson-red suit used by the officers employed by Cybersun."
+	icon_state = "cybersun_officer"
+	alt_covers_chest = TRUE
+	supports_variations = DIGITIGRADE_VARIATION
+
 /obj/item/clothing/under/syndicate/medic
 	name = "Cybersun medical jumpsuit"
 	desc = "Sterile coveralls worn by Cybersun Industries field medics for protection against biological hazards."
 	icon_state = "cybersun_med"
 	permeability_coefficient = 0.5
 	armor = list("melee" = 0, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 10, "rad" = 0, "fire" = 0, "acid" = 0)
+	supports_variations = DIGITIGRADE_VARIATION_NO_NEW_ICON | VOX_VARIATION | KEPORI_VARIATION
 
 /obj/item/clothing/under/syndicate/medic/skirt
 	name = "Cybersun medical jumpskirt"
@@ -149,6 +160,7 @@
 	name = "Donk! Co. employee uniform"
 	desc = "The standard employee uniform of Donk Co. Smells like minimum wage."
 	icon_state = "donk_cargo"
+	can_adjust = FALSE
 	armor = list("melee" = 10, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 50, "acid" = 40)
 	body_parts_covered = CHEST|GROIN|ARMS
 	alt_covers_chest = TRUE
@@ -175,6 +187,7 @@
 	name = "GEC engineer jumpsuit"
 	desc = "A jumpsuit worn by GEC engineers. This one is worn by low ranking engineers."
 	icon_state = "gec_engineer"
+	can_adjust = FALSE
 	armor = list("melee" = 0, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 10, "fire" = 60, "acid" = 20)
 	resistance_flags = NONE
 
@@ -222,9 +235,12 @@
 	uplink_type = /obj/item/uplink/nuclear
 	uplink_slot = ITEM_SLOT_BELT
 
+//INTEQ
+//maybe split it into it's own file?
+
 /obj/item/clothing/under/syndicate/inteq
 	name = "inteq turtleneck"
-	desc = "A drab brown turtleneck with black digital camo pants, it has a small 'IRMG' embroidered onto the shoulder."
+	desc = "A rich brown turtleneck with black pants, it has a small 'IRMG' embroidered onto the shoulder."
 	icon_state = "inteq"
 	item_state = "bl_suit"
 	has_sensor = HAS_SENSORS
@@ -236,7 +252,7 @@
 
 /obj/item/clothing/under/syndicate/inteq/skirt
 	name = "inteq skirtleneck"
-	desc = "A drab brown turtleneck with a free flowing black skirt, it has a small 'IRMG' embroidered onto the shoulder."
+	desc = "A rich brown turtleneck with a free flowing black skirt, it has a small 'IRMG' embroidered onto the shoulder."
 	icon_state = "inteq_skirt"
 	item_state = "bl_suit"
 	has_sensor = HAS_SENSORS
@@ -247,25 +263,25 @@
 
 /obj/item/clothing/under/syndicate/inteq/artificer
 	name = "inteq artificer overalls"
-	desc = "A black set of overalls atop a standard issue turtleneck, for the IRMG's support division engineers."
+	desc = "A black set of overalls atop a standard issue turtleneck, for the IRMG's support division Artificers."
 	icon_state = "inteqeng"
-	supports_variations = KEPORI_VARIATION | DIGITIGRADE_VARIATION
+	supports_variations = KEPORI_VARIATION | VOX_VARIATION | DIGITIGRADE_VARIATION
 
 /obj/item/clothing/under/syndicate/inteq/skirt/artificer
 	name = "inteq artificer overall skirt"
-	desc = "A black set of overalls in the likeness of a skirt atop a standard issue turtleneck, for the IRMG's support division engineers."
+	desc = "A black set of overalls in the likeness of a skirt atop a standard issue turtleneck, for the IRMG's support division Artificers."
 	icon_state = "inteqeng_skirt"
 	supports_variations = KEPORI_VARIATION | DIGITIGRADE_VARIATION_NO_NEW_ICON
 
 /obj/item/clothing/under/syndicate/inteq/corpsman
 	name = "inteq corpsman turtleneck"
-	desc = "A sterile white turtleneck with tactical cargo pants, it is emblazoned with the lettering 'IRMG' on the shoulder. For the IRMG's support division corpsmen."
+	desc = "A sterile white turtleneck with tactical cargo pants, it is emblazoned with the lettering 'IRMG' on the shoulder. For the IRMG's support division Corpsmen."
 	icon_state = "inteqmed"
-	supports_variations = KEPORI_VARIATION | DIGITIGRADE_VARIATION
+	supports_variations = KEPORI_VARIATION | VOX_VARIATION | DIGITIGRADE_VARIATION
 
 /obj/item/clothing/under/syndicate/inteq/skirt/corpsman
 	name = "inteq corpsman skirtleneck"
-	desc = "A sterile white turtleneck with a free flowing black skirt, it is emblazoned with the lettering 'IRMG' on the shoulder. For the IRMG's support division corpsmen."
+	desc = "A sterile white turtleneck with a free flowing black skirt, it is emblazoned with the lettering 'IRMG' on the shoulder. For the IRMG's support division Corpsmen."
 	icon_state = "inteqmed_skirt"
 	supports_variations = KEPORI_VARIATION | DIGITIGRADE_VARIATION_NO_NEW_ICON
 
@@ -275,11 +291,16 @@
 	icon_state = "inteqmaid"
 	item_state = "inteqmaid"
 	can_adjust = FALSE
-	supports_variations = KEPORI_VARIATION | DIGITIGRADE_VARIATION_NO_NEW_ICON
+	supports_variations = KEPORI_VARIATION | VOX_VARIATION | DIGITIGRADE_VARIATION_NO_NEW_ICON
 
 /obj/item/clothing/under/syndicate/inteq/skirt/maid/Initialize()
 	. = ..()
 	var/obj/item/clothing/accessory/maidapron/inteq/A = new (src)
 	attach_accessory(A)
 
-
+/obj/item/clothing/under/syndicate/inteq/honorable
+	name = "honorable vanguard turtleneck"
+	desc = "a midnight black turtleneck worn by honorable Vanguards of the IRMG."
+	icon_state = "inteq_honorable"
+	item_state = "inteq_honorable"
+	supports_variations = KEPORI_VARIATION | DIGITIGRADE_VARIATION

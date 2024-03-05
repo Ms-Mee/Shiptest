@@ -95,11 +95,6 @@
 	display_name = "head bandana, red"
 	path = /obj/item/clothing/mask/bandana/red
 
-
-/datum/gear/hat/maidheadband
-	display_name = "maid headband"
-	path = /obj/item/clothing/head/maidheadband
-
 /datum/gear/hat/fedora
 	display_name = "fedora"
 	path = /obj/item/clothing/head/fedora

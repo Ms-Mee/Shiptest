@@ -45,11 +45,11 @@
 
 /obj/mecha/working/ripley/go_out()
 	..()
-	update_icon()
+	update_appearance()
 
 /obj/mecha/working/ripley/moved_inside(mob/living/carbon/human/H)
 	..()
-	update_icon()
+	update_appearance()
 
 /obj/mecha/working/ripley/check_for_internal_damage(list/possible_int_damage,ignore_threshold=null)
 	if (!enclosed)
@@ -146,10 +146,13 @@
 		else
 			var/obj/item/mecha_parts/mecha_equipment/drill/D = new
 			D.attach(src)
-
-	else //Add plasma cutter if no drill
-		var/obj/item/mecha_parts/mecha_equipment/weapon/energy/plasma/P = new
-		P.attach(src)
+	else //Add a ranged option if no drill
+		if(prob(15)) // plas cutters for lucky fuckers
+			var/obj/item/mecha_parts/mecha_equipment/weapon/energy/plasma/plasmacutter = new
+			plasmacutter.attach(src)
+		else
+			var/obj/item/mecha_parts/mecha_equipment/weapon/energy/mecha_kineticgun/kinetic = new
+			kinetic.attach(src)
 
 	//Add ore box to cargo
 	cargo.Add(new /obj/structure/ore_box(src))

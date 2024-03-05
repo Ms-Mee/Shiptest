@@ -7,16 +7,9 @@
 	slot_flags = ITEM_SLOT_HEAD
 	var/blockTracking = 0 //For AI tracking
 	var/can_toggle = null
-	dynamic_hair_suffix = "+generic"
 	greyscale_icon_state = "hat"
 	greyscale_colors = list(list(16,26))
 	supports_variations = VOX_VARIATION
-
-/obj/item/clothing/head/Initialize()
-	. = ..()
-	if(ishuman(loc) && dynamic_hair_suffix)
-		var/mob/living/carbon/human/H = loc
-		H.update_hair()
 
 ///Special throw_impact for hats to frisbee hats at people to place them on their heads/attempt to de-hat them.
 /obj/item/clothing/head/throw_impact(atom/hit_atom, datum/thrownthing/thrownthing)
@@ -70,7 +63,9 @@
 		if(damaged_clothes)
 			. += mutable_appearance('icons/effects/item_damage.dmi', "damagedhelmet")
 		if(HAS_BLOOD_DNA(src))
-			. += mutable_appearance('icons/effects/blood.dmi', "helmetblood")
+			var/mutable_appearance/bloody_helmet = mutable_appearance('icons/effects/blood.dmi', "helmetblood")
+			bloody_helmet.color = get_blood_dna_color(return_blood_DNA())
+			. += bloody_helmet
 
 /obj/item/clothing/head/update_clothes_damaged_state(damaging = TRUE)
 	..()

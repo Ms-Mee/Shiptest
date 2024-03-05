@@ -48,6 +48,10 @@
 
 	)
 
+/datum/gear/eyewear/glasses/precription/thin
+	display_name ="prescription glasses, thin"
+	path = /obj/item/clothing/glasses/regular/thin
+
 /datum/gear/eyewear/glasses/prescription/large
 	display_name = "prescription glasses, large"
 	path = /obj/item/clothing/glasses/regular/circle

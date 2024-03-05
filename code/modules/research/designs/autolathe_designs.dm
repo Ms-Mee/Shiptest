@@ -215,6 +215,14 @@
 	category = list("initial", "Electronics")
 	departmental_flags = DEPARTMENTAL_FLAG_ENGINEERING
 
+/datum/design/lightswitch_frame
+	name = "Lightswitch Frame"
+	id = "lightswitch_frame"
+	build_type = AUTOLATHE
+	materials = list(/datum/material/iron = 50, /datum/material/glass = 50)
+	build_path = /obj/item/wallframe/light_switch
+	category = list("initial", "Misc")
+
 /datum/design/camera
 	name = "Camera"
 	id = "camera"
@@ -586,6 +594,14 @@
 	build_path = /obj/item/storage/pill_bottle
 	category = list("initial", "Medical", "Medical Designs")
 
+/datum/design/chem_jug
+	name = "Chemical Jug"
+	id = "chem_jug"
+	build_type = AUTOLATHE | PROTOLATHE
+	materials = list(/datum/material/plastic = 4000)
+	build_path = /obj/item/reagent_containers/glass/chem_jug/open
+	category = list("initial", "Medical", "Medical Designs")
+
 /datum/design/recorder
 	name = "Universal Recorder"
 	id = "recorder"
@@ -783,11 +799,11 @@
 	category = list("hacked", "Security")
 
 /datum/design/c38
-	name = "Ammo Box (.38)"
+	name = "Ammo Box (.38 surplus)"
 	id = "c38"
 	build_type = AUTOLATHE | PROTOLATHE
 	materials = list(/datum/material/iron = 15000)
-	build_path = /obj/item/ammo_box/c38_box
+	build_path = /obj/item/ammo_box/c38_box/surplus
 	category = list("initial", "Security", "Ammo")
 
 /datum/design/beanbag_slug
@@ -1166,3 +1182,19 @@
 	materials = list(/datum/material/plastic = 5000)
 	build_path = /obj/item/storage/bag/trash
 	category = list("initial","Tools","Tool Designs","Misc")
+
+/datum/design/bodybag
+	name="Body Bag"
+	id="bodybag"
+	build_type = AUTOLATHE | PROTOLATHE
+	materials = list(/datum/material/plastic = 4000)
+	build_path = /obj/item/bodybag
+	category = list("initial","Medical","Misc")
+
+/datum/design/fishing_rod_basic
+	name = "Fishing Rod"
+	id = "fishing rod"
+	build_type = AUTOLATHE
+	materials = list(/datum/material/iron = 200, /datum/material/glass = 200)
+	build_path = /obj/item/fishing_rod
+	category = list("initial","Misc","Equipment")

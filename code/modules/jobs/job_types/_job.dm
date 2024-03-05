@@ -15,22 +15,8 @@
 	//Bitflags for the job
 	var/auto_deadmin_role_flags = NONE
 
-	//How many players can be this job
-	var/total_positions = 0
-
-	//How many players can spawn in as this job
-	var/spawn_positions = 0
-
-	//How many players have this job
-	var/current_positions = 0
-
 	//If you have the use_age_restriction_for_jobs config option enabled and the database set up, this option will add a requirement for players to be at least minimal_player_age days old. (meaning they first signed in at least that many days before.)
 	var/minimal_player_age = 0
-
-	var/exp_requirements = 0
-
-	var/exp_type = ""
-	var/exp_type_department = ""
 
 	/// A link to the relevant wiki related to the job. Ex: "Space_law" would link to wiki.blah/Space_law
 	var/wiki_page = ""
@@ -47,6 +33,14 @@
 	if(new_name)
 		name = new_name
 		outfit = new_outfit
+		register()
+
+/datum/job/proc/register()
+	GLOB.occupations += src
+	if(name in GLOB.name_occupations)
+		return
+
+	GLOB.name_occupations[name] = src
 
 //Only override this proc
 //H is usually a human unless an /equip override transformed it
@@ -87,8 +81,6 @@
 	if(living_mob.client.holder)
 		if(CONFIG_GET(flag/auto_deadmin_players) || (living_mob.client.prefs?.toggles & DEADMIN_ALWAYS))
 			living_mob.client.holder.auto_deadmin()
-		else
-			SSjob.handle_auto_deadmin_roles(living_mob.client, name)
 
 	radio_help_message(living_mob)
 	//WS Begin - Wikilinks
@@ -167,7 +159,7 @@
 	return max(0, minimal_player_age - C.player_age)
 
 /datum/job/proc/radio_help_message(mob/M)
-	to_chat(M, "<b>Prefix your message with :h to speak on your department's radio. To see other prefixes, look closely at your headset.</b>")
+	to_chat(M, "<b>Your ship most likely does not have telecomms. Prefix your message with :L or :R, depending on the hand you're holding the radio with, to speak with a handheld radio. Otherwise, you can speak with your headset by prefixing your message with :h.</b>")
 
 /datum/outfit/job
 	name = "Standard Gear"
@@ -188,6 +180,8 @@
 
 	///The icon this outfit's ID will have when shown on a sechud and ID cards. See [icons\mob\hud.dmi] for a list of icons. Leave null for default.
 	var/job_icon
+	// the background of the job icon
+	var/faction_icon
 
 	var/alt_uniform
 
@@ -257,9 +251,9 @@
 	if(visualsOnly)
 		return
 
-	var/datum/job/J = SSjob.GetJobType(jobtype)
+	var/datum/job/J = GLOB.type_occupations[jobtype]
 	if(!J)
-		J = SSjob.GetJob(H.job)
+		J = GLOB.name_occupations[H.job]
 
 	var/obj/item/card/id/C = H.wear_id
 	if(istype(C))
@@ -273,6 +267,7 @@
 		if(H.age)
 			C.registered_age = H.age
 		C.job_icon = job_icon
+		C.faction_icon = faction_icon
 		C.update_label()
 		for(var/A in SSeconomy.bank_accounts)
 			var/datum/bank_account/B = A

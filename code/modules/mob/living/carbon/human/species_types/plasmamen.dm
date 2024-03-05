@@ -3,7 +3,7 @@
 	id = SPECIES_PLASMAMAN
 	sexes = 0
 	meat = /obj/item/stack/sheet/mineral/plasma
-	species_traits = list(NOBLOOD,NOTRANSSTING)
+	species_traits = list(NOBLOOD,NOTRANSSTING,NOHUSK)
 	inherent_traits = list(TRAIT_RESISTCOLD,TRAIT_RADIMMUNE,TRAIT_GENELESS,TRAIT_NOHUNGER,TRAIT_ALWAYS_CLEAN)
 	inherent_biotypes = MOB_HUMANOID|MOB_MINERAL
 	mutantlungs = /obj/item/organ/lungs/plasmaman
@@ -165,9 +165,6 @@
 
 		if("Clown")
 			O = new /datum/outfit/plasmaman/clown
-
-		if("Lieutenant")	//WS edit plasmaman customization
-			O = new /datum/outfit/plasmaman/lieutenant	//WS edit plasmaman customization
 
 		if("SolGov Representative") //WS edit sgr
 			O = new /datum/outfit/plasmaman/solgov

@@ -1,4 +1,4 @@
-// Hey! Listen! Update \config\lavaruinblacklist.txt with your new ruins!
+// Hey! Listen! Update _maps\map_catalogue.txt with your new ruins!
 
 /datum/map_template/ruin/lavaland
 	prefix = "_maps/RandomRuins/LavaRuins/"
@@ -8,36 +8,12 @@
 	cost = 5
 	allow_duplicates = FALSE
 
-/datum/map_template/ruin/lavaland/biodome/beach
-	name = "Biodome Beach"
-	id = "biodome-beach"
-	description = "Seemingly plucked from a tropical destination, this beach is calm and cool, with the salty waves roaring softly in the background. \
-	Comes with a rustic wooden bar and suicidal bartender."
-	suffix = "lavaland_biodome_beach.dmm"
-
 /datum/map_template/ruin/lavaland/biodome/winter
 	name = "Biodome Winter"
 	id = "biodome-winter"
 	description = "For those getaways where you want to get back to nature, but you don't want to leave the fortified military compound where you spend your days. \
 	Includes a unique(*) laser pistol display case, and the recently introduced I.C.E(tm)."
 	suffix = "lavaland_surface_biodome_winter.dmm"
-
-/datum/map_template/ruin/lavaland/syndicate_base
-	name = "Syndicate Lava Base"
-	id = "lava-base"
-	description = "A secret base researching illegal bioweapons, it is closely guarded by an elite team of syndicate agents."
-	suffix = "lavaland_surface_syndicate_base1.dmm"
-	cost = 20
-	allow_duplicates = FALSE
-
-/datum/map_template/ruin/lavaland/free_golem
-	name = "Free Golem Ship"
-	id = "golem-ship"
-	description = "Lumbering humanoids, made out of precious metals, move inside this ship. They frequently leave to mine more minerals, which they somehow turn into more of them. \
-	Seem very intent on research and individual liberty, and also geology-based naming?"
-	cost = 20
-	suffix = "lavaland_surface_golem_ship.dmm"
-	allow_duplicates = FALSE
 
 /datum/map_template/ruin/lavaland/sin
 	cost = 10
@@ -86,14 +62,6 @@
 	id = "cultaltar"
 	description = "A place of vile worship, the scrawling of blood in the middle glowing eerily. A demonic laugh echoes throughout the caverns."
 	suffix = "lavaland_surface_cultaltar.dmm"
-	allow_duplicates = FALSE
-	cost = 10
-
-/datum/map_template/ruin/lavaland/hermit
-	name = "Makeshift Shelter"
-	id = "hermitcave"
-	description = "A place of shelter for a lone hermit, scraping by to live another day."
-	suffix = "lavaland_surface_hermit.dmm"
 	allow_duplicates = FALSE
 	cost = 10
 
@@ -151,3 +119,15 @@
 	id = "crashed_pinnance"
 	description = "A crashed shuttlecraft, looks like the pilot didn't make it."
 	suffix = "lavaland_surface_crashed_pinnance.dmm"
+
+/datum/map_template/ruin/lavaland/codelab
+	name = "Nanotrasen Genetic Research Facility"
+	id = "codelab"
+	description = "A Nanotrasen genetic research facility, abandoned and ripe for looting. Whats that goo over there?"
+	suffix = "lavaland_surface_codelab.dmm"
+
+/datum/map_template/ruin/lavaland/lava_canyon
+	name = "Lava Canyon"
+	id = "lava_canyon"
+	description = "Tectonic activity has gouged a large fissure into the surface of the planet here. Tucked in the crevasse, the remains of an ashwalker village lay in ashes."
+	suffix = "lavaland_surface_lava_canyon.dmm"

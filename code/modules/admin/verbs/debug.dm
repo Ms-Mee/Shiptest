@@ -47,7 +47,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	if(ishuman(M))
 		log_admin("[key_name(src)] has robotized [M.key].")
 		var/mob/living/carbon/human/H = M
-		INVOKE_ASYNC(H, /mob/living/carbon/human.proc/Robotize)
+		INVOKE_ASYNC(H, TYPE_PROC_REF(/mob/living/carbon/human, Robotize))
 
 	else
 		alert("Invalid mob")
@@ -84,7 +84,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 		return
 
 	log_admin("[key_name(src)] has animalized [M.key].")
-	INVOKE_ASYNC(M, /mob.proc/Animalize)
+	INVOKE_ASYNC(M, TYPE_PROC_REF(/mob, Animalize))
 
 
 /client/proc/makepAI(turf/T in GLOB.mob_list)
@@ -128,7 +128,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 		alert("Wait until the game starts")
 		return
 	if(ishuman(M))
-		INVOKE_ASYNC(M, /mob/living/carbon/human/proc/Alienize)
+		INVOKE_ASYNC(M, TYPE_PROC_REF(/mob/living/carbon/human, Alienize))
 		SSblackbox.record_feedback("tally", "admin_verb", 1, "Make Alien") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 		log_admin("[key_name(usr)] made [key_name(M)] into an alien at [AREACOORD(M)].")
 		message_admins("<span class='adminnotice'>[key_name_admin(usr)] made [ADMIN_LOOKUPFLW(M)] into an alien.</span>")
@@ -143,7 +143,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 		alert("Wait until the game starts")
 		return
 	if(ishuman(M))
-		INVOKE_ASYNC(M, /mob/living/carbon/human/proc/slimeize)
+		INVOKE_ASYNC(M, TYPE_PROC_REF(/mob/living/carbon/human, slimeize))
 		SSblackbox.record_feedback("tally", "admin_verb", 1, "Make Slime") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 		log_admin("[key_name(usr)] made [key_name(M)] into a slime at [AREACOORD(M)].")
 		message_admins("<span class='adminnotice'>[key_name_admin(usr)] made [ADMIN_LOOKUPFLW(M)] into a slime.</span>")
@@ -216,7 +216,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 					var/obj/item/storage/wallet/W = worn
 					W.front_id = id
 					id.forceMove(W)
-					W.update_icon()
+					W.update_appearance()
 			else
 				H.equip_to_slot(id,ITEM_SLOT_ID)
 
@@ -549,7 +549,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 			F.power = 250
 			F.warming_up = 3
 			F.start_fields()
-			F.update_icon()
+			F.update_appearance()
 
 	spawn(30)
 		for(var/obj/machinery/the_singularitygen/G in GLOB.machines)
@@ -690,6 +690,27 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 		to_chat(usr, "<span class='name'>[template.name]</span>", confidential = TRUE)
 		to_chat(usr, "<span class='italics'>[template.description]</span>", confidential = TRUE)
 
+/client/proc/fucky_wucky()
+	set category = "Debug"
+	set name = "Fucky Wucky"
+	set desc = "Inform the players that the code monkeys at our headquarters are working very hard to fix this."
+
+	if(!check_rights(R_DEBUG))
+		return
+	remove_verb(/client/proc/fucky_wucky)
+	message_admins("<span class='adminnotice'>[key_name_admin(src)] did a fucky wucky.</span>")
+	log_admin("[key_name(src)] did a fucky wucky.")
+	for(var/m in GLOB.player_list)
+		var/datum/asset/fuckywucky = get_asset_datum(/datum/asset/simple/fuckywucky)
+		fuckywucky.send(m)
+		SEND_SOUND(m, 'sound/misc/fuckywucky.ogg')
+		to_chat(m, span_purple(examine_block("<img src='[SSassets.transport.get_asset_url("fuckywucky.png")]'>")))
+
+	addtimer(CALLBACK(src, PROC_REF(restore_fucky_wucky)), 600)
+
+/client/proc/restore_fucky_wucky()
+	add_verb(/client/proc/fucky_wucky)
+
 /client/proc/toggle_medal_disable()
 	set category = "Debug"
 	set name = "Toggle Medal Disable"
@@ -815,7 +836,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	var/list/sorted = list()
 	for (var/source in per_source)
 		sorted += list(list("source" = source, "count" = per_source[source]))
-	sorted = sortTim(sorted, .proc/cmp_timer_data)
+	sorted = sortTim(sorted, PROC_REF(cmp_timer_data))
 
 	// Now that everything is sorted, compile them into an HTML output
 	var/output = "<table border='1'>"

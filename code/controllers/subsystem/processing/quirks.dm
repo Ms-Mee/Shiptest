@@ -32,7 +32,7 @@ PROCESSING_SUBSYSTEM_DEF(quirks)
 							list("Ageusia","Vegetarian","Deviant Tastes"), \
 							list("Ananas Affinity","Ananas Aversion"), \
 							list("Alcohol Tolerance","Light Drinker"), \
-							list("Clown Fan","Mime Fan"), \
+							list("Clown Fan","Mime Fan", "RILENA Super Fan"), \
 							list("Bad Touch", "Friendly"))
 	quirk_species_locks = list(
 	"Blood Deficiency" = TRAIT_SPECIES_BLACKLIST(SPECIES_IPC, SPECIES_JELLYPERSON, SPECIES_PLASMAMAN, SPECIES_VAMPIRE))

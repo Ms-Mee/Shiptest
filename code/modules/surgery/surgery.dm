@@ -10,7 +10,7 @@
 	var/requires_bodypart_type = BODYTYPE_ORGANIC				//Prevents you from performing an operation on incorrect limbs. 0 for any limb type
 	var/list/possible_locs = list() 							//Multiple locations
 	var/ignore_clothes = FALSE									//This surgery ignores clothes
-	var/mob/living/carbon/target								//Operation target mob
+	var/mob/living/target										//Operation target mob
 	var/obj/item/bodypart/operated_bodypart						//Operable body part
 	var/requires_bodypart = TRUE								//Surgery available only when a bodypart is present, or only when it is missing.
 	var/speed_modifier = 0										//Step speed modifier
@@ -36,7 +36,6 @@
 	target = null
 	operated_bodypart = null
 	return ..()
-
 
 /datum/surgery/proc/can_start(mob/user, mob/living/patient) //FALSE to not show in list
 	. = TRUE
@@ -162,7 +161,6 @@
 // var/list/bodyparts (/mob/living/carbon/human) is the LIMBS of a Mob.
 //Surgical procedures are initiated by attempt_initiate_surgery(), which is called by sharp objects, such as scalpels.
 
-
 //TODO
 //specific steps for some surgeries (fluff text)
 //more interesting failure options
@@ -170,7 +168,6 @@
 //more surgeries!
 //add a probability modifier for the state of the surgeon- health, twitching, etc. blindness, god forbid.
 //helper for converting a zone_sel.selecting to body part (for damage)
-
 
 //RESOLVED ISSUES //"Todo" jobs that have been completed
 //combine hands/feet into the arms - Hands/feet were removed - RR
