@@ -415,9 +415,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					// Everyone gets mutant colors now.
 					dat += "<h3>Mutant Colors</h3>"
 
-				dat += "<span style='border: 1px solid #161616; background-color: #[features["mcolor"]];'>&nbsp;&nbsp;&nbsp;</span> <a href='?_src_=prefs;preference=mutant_color;task=input'>Change</a><BR>"
-
-				mutant_colors = TRUE
+					dat += "<span style='border: 1px solid #161616; background-color: #[features["mcolor"]];'>&nbsp;&nbsp;&nbsp;</span> <a href='?_src_=prefs;preference=mutant_color;task=input'>Change</a><BR>"
+					dat += "<span style='border: 1px solid #161616; background-color: #[features["mcolor2"]];'>&nbsp;&nbsp;&nbsp;</span> <a href='?_src_=prefs;preference=mutant_color_2;task=input'>Change</a><BR>"
 
 					if(istype(pref_species, /datum/species/ethereal)) //not the best thing to do tbf but I dont know whats better.
 
@@ -491,10 +490,10 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 						dat += "<a href='?_src_=prefs;preference=face_markings;task=input'>[features["face_markings"]]</a><BR>"
 
-				mutant_category++
-				if(mutant_category >= MAX_MUTANT_ROWS)
-					dat += "</td>"
-					mutant_category = 0
+						mutant_category++
+						if(mutant_category >= MAX_MUTANT_ROWS)
+							dat += "</td>"
+							mutant_category = 0
 
 					if("horns" in pref_species.default_features)
 						if(!mutant_category)
@@ -872,34 +871,16 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						dat += "</table><br>"
 
 				if(2) //Loadout
-			if(path)
-				var/savefile/S = new /savefile(path)
-				if(S)
-					dat += "<center>"
-					var/name
-					var/unspaced_slots = 0
-					for(var/i=1, i<=max_save_slots, i++)
-						unspaced_slots++
-						if(unspaced_slots > 4)
-							dat += "<br>"
-							unspaced_slots = 0
-						S.cd = "/character[i]"
-						S["real_name"] >> name
-						if(!name)
-							name = "Character[i]"
-						dat += "<a style='white-space:nowrap;' href='?_src_=prefs;preference=changeslot;num=[i];' [i == default_slot ? "class='linkOn'" : ""]>[name]</a> "
-					dat += "</center>"
-					dat += "<HR>"
-			var/list/type_blacklist = list()
-			if(equipped_gear && length(equipped_gear))
-				for(var/i = 1, i <= length(equipped_gear), i++)
-					var/datum/gear/G = GLOB.gear_datums[equipped_gear[i]]
-					if(G)
-						if(G.subtype_path in type_blacklist)
-							continue
-						type_blacklist += G.subtype_path
-					else
-						equipped_gear.Cut(i,i+1)
+					var/list/type_blacklist = list()
+					if(equipped_gear && length(equipped_gear))
+						for(var/i = 1, i <= length(equipped_gear), i++)
+							var/datum/gear/G = GLOB.gear_datums[equipped_gear[i]]
+							if(G)
+								if(G.subtype_path in type_blacklist)
+									continue
+								type_blacklist += G.subtype_path
+							else
+								equipped_gear.Cut(i,i+1)
 
 					dat += "<div><div style='overflow-y:scroll;height=80px'><table align='center' width='100%' height='100px' style='background-color:#2A2A2A;overflow-y:scroll'>"
 					dat += "<tr><td colspan=5><center><b>Current loadout balance: [CONFIG_GET(number/max_loadout_balance) - get_loadout_balance()]/[CONFIG_GET(number/max_loadout_balance)]</b> \[<a href='?_src_=prefs;preference=gear;clear_loadout=1'>Clear Loadout</a>\] | \[<a href='?_src_=prefs;preference=gear;toggle_loadout=1'>Toggle Loadout</a>\]</center></td></tr>"
