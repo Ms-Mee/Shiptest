@@ -21,7 +21,7 @@
 
 /datum/quirk/addicted
 	name = "Addicted"
-	desc = "You have a deep addiction to one or more substances. <b>You can get a bottle of pills for free on the loadout menu if you have the matching addiction.</b>"
+	desc = "You have a deep addiction to one or more substances. <b>You can get a bottle of pills for free on the loadout menu if you have the matching addiction (Not implemented yet).</b>"
 	gain_text = "<span class='danger'>Your addiction is already acting up again...</span>"
 	lose_text = "<span class='notice'>Maybe this time you kicked them for good.</span>"
 	medical_record_text = "Patient has a history of hard drugs."
@@ -86,7 +86,7 @@
 
 /datum/quirk/addicted/smoker
 	name = "Smoker"
-	desc = "Sometimes you just really want a smoke. Probably not great for your lungs. <b>You can get a packet of your favorite brand and a cheap lighter for free on the loadout menu.</b>"
+	desc = "Sometimes you just really want a smoke. Probably not great for your lungs. <b>You can get a packet of your favorite brand and a cheap lighter for free on the loadout menu(Not implemented yet).</b>"
 	value = -1
 	gain_text = "<span class='danger'>You could really go for a smoke right about now.</span>"
 	lose_text = "<span class='notice'>You feel like you should quit smoking.</span>"
