@@ -19,9 +19,58 @@ PROCESSING_SUBSYSTEM_DEF(quirks)
 	///A list a list of quirks that can not be used with each other. Format: list(quirk1,quirk2),list(quirk3,quirk4)
 	var/list/quirk_blacklist = list()
 	///List of id-based locks for species, use either TRAIT_SPECIES_WHITELIST or TRAIT_SPECIES_BLACKLIST inputting the species ids to said macros. Example: species_lock = TRAIT_SPECIES_WHITELIST(SPECIES_IPC, SPECIES_MOTH)
-	var/list/quirk_species_locks = list()
-	var/list/quirk_customizations = list()
-	var/list/quirk_customization_options = list()
+	var/list/quirk_species_locks = list("Phobia" = list("Phobia"= list("limit" = 5, )))
+	var/list/quirk_customizations = list(
+		"Phobia" = list(
+			"Phobia"= list(
+				"limit" = 5,
+				"options" = list(
+					"anime"=				list("cost" = 1, "value" = -1),
+					"aliens" =				list("cost" = 2, "value" = -4),
+					"authority" =			list("cost" = 1, "value" = -2),
+					"birds" =				list("cost" = 2, "value" = -4),
+					"clowns"=				list("cost" = 1, "value" = -1),
+					"doctors" =				list("cost" = 2, "value" = -4),
+					"falling" =				list("cost" = 0, "value" = -1),
+					"greytide" =			list("cost" = 1, "value" = -2),
+					"lizards" =				list("cost" = 2, "value" = -4),
+					"robots" =				list("cost" = 2, "value" = -4),
+					"security" =			list("cost" = 1, "value" = -2),
+					"skeletons" =			list("cost" = 1, "value" = -2),
+					"snakes"=				list("cost" = 1, "value" = -1),
+					"space" =				list("cost" = 2, "value" = -5),
+					"spiders" =				list("cost" = 2, "value" = -3),
+					"strangers" =			list("cost" = 0, "value" = 0),
+					"the supernatural" =	list("cost" = 2, "value" = -3)
+				)
+			)
+		),
+		"Addicted" = list(
+			"Addiction"= list(
+				"limit" = 6,
+				"options" = list(
+					"Crank" =				list("cost" = 1, "value" = -1),
+					"Happiness" =			list("cost" = 1, "value" = -1),
+					"Krokodil" =			list("cost" = 3, "value" = -2),
+					"Methamphetamine" =		list("cost" = 2, "value" = -1),
+					"Morphine"=				list("cost" = 1, "value" = -1)
+				)
+			)
+		),
+		"Smoker" = list(
+			"Favorite Brand"= list(
+				"limit" = 1,
+				"options" = list(
+					"Carp Classic"=			list("cost" = 1, "value" = 0),
+					"Midori Tabako" =		list("cost" = 1, "value" = 0),
+					"Robust" =				list("cost" = 1, "value" = 0),
+					"Robust Gold" =			list("cost" = 1, "value" = 0),
+					"Space Cigarettes"=		list("cost" = 1, "value" = 0),
+					"Uplift Smooth" =		list("cost" = 1, "value" = 0)
+				)
+			)
+		)
+			)
 
 /datum/controller/subsystem/processing/quirks/Initialize(timeofday)
 	if(!quirks.len)
@@ -49,37 +98,6 @@ PROCESSING_SUBSYSTEM_DEF(quirks)
 		var/datum/quirk/T = V
 		quirks[initial(T.name)] = T
 		quirk_points[initial(T.name)] = initial(T.value)
-		if(initial(T.additional_values))
-			var/list/values = splittext(initial(T.additional_values), ", ")
-			quirk_customizations[initial(T.name)] = splittext(initial(T.additional_values), ", ")
-			var/value_address = 1
-			var/list/value_options = list()
-			var/handle_options = initial(T.additional_value_options)
-			if(handle_options)
-				value_options = splittext(handle_options, "; ")
-			for(var/value in values)
-				var/list/value_split = splittext(value, " = ")
-				if(length(value_split) == 2)
-					values[value_split[1]] = list("limit" = text2num(value_split[2]))
-					values -= value
-				else
-					values[value] = list("limit" = 1)
-				if(value == "Phobia")
-					continue
-				if(handle_options)
-					var/list/value_options_split = splittext(value_options[value_address], ", ")
-					for(var/value_option in value_options_split)
-						var/value_option_split =  splittext(value_option, " = ")
-						switch(length(value_option_split))
-							if(1)
-								value_options[value_option_split[1]] = list("cost" = 1, "value" = 0)
-							if(2)
-								value_options[value_option_split[1]] = list("cost" = text2num(value_option_split[2]), "value" = 0)
-							if(3)
-								value_options[value_option_split[1]] = list("cost" = text2num(value_option_split[2]), "value" = text2num(value_option_split[3]))
-						values[value]["options"] = value_options
-				value_address++
-			quirk_customization_options = values
 
 /datum/controller/subsystem/processing/quirks/proc/AssignQuirks(mob/living/user, client/cli, spawn_effects)
 	var/badquirk = FALSE

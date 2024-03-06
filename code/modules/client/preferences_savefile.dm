@@ -470,6 +470,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 
 	//Quirks
 	READ_FILE(S["all_quirks"], all_quirks)
+	READ_FILE(S["quirk_preferences"], quirk_preferences)
 
 	//Flavor Text
 	S["feature_flavor_text"]		>> features["flavor_text"]
@@ -558,8 +559,10 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	features["flavor_text"]				= sanitize_text(features["flavor_text"], initial(features["flavor_text"]))
 
 	all_quirks = SANITIZE_LIST(all_quirks)
+	quirk_preferences = SANITIZE_LIST(quirk_preferences)
 
 //Make sure all quirks are compatible
+	update_quirk_preferences()
 	check_quirk_compatibility()
 
 	return TRUE
@@ -648,6 +651,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["selected_outfit"]				, selected_outfit)
 	//Quirks
 	WRITE_FILE(S["all_quirks"]					, all_quirks)
+	WRITE_FILE(S["quirk_preferences"]			, quirk_preferences)
 
 	return TRUE
 

@@ -32,14 +32,6 @@ GLOBAL_LIST_EMPTY(gear_datums)
 				GLOB.loadout_categories[loadout_category] = new /datum/loadout_category(loadout_category)
 			var/datum/loadout_category/LC = GLOB.loadout_categories[loadout_category]
 			GLOB.gear_datums[display_name] = new geartype
-			if(initial(loadout_entry.unifier_path) && initial(loadout_entry.unifier_path) != loadout_entry)
-				var/datum/gear/unifier = initial(loadout_entry.unifier_path)
-				var/unifier_name = initial(unifier.display_name)
-				if(!GLOB.gear_datums[unifier_name])
-					GLOB.gear_datums[unifier_name] = new unifier
-				if(!LC.gear[unifier_name])
-					LC.gear[unifier_name] = GLOB.gear_datums[unifier_name]
-				continue
 			LC.gear[display_name] = GLOB.gear_datums[display_name]
 
 	GLOB.loadout_categories = sortAssoc(GLOB.loadout_categories)
@@ -62,8 +54,6 @@ GLOBAL_LIST_EMPTY(gear_datums)
 	var/sort_categories = "Misc"
 	///for skipping organizational subtypes (optional)
 	var/subtype_path = /datum/gear
-	///for adding more than one item on the same entry
-	var/unifier_path
 	///Balance cost of loadout item
 	var/cost = 5
 	///Maximum amount of an item that can be taken

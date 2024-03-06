@@ -11,8 +11,6 @@
 	var/mood_quirk = FALSE //if true, this quirk affects mood and is unavailable if moodlets are disabled
 	var/list/mob_traits //if applicable, apply and remove these mob traits
 	var/mob/living/quirk_holder
-	var/additional_values //Very weird but it works. Essentially, you format this way: additional_values = "value_1, value_2 = 0..." where ", " is the separator. Optional: " = num" is the limit, with 0 indicating that all options can be taken at once." = 1" is not necessary and as such ommited.
-	var/additional_value_options //Formatted additional_value_options = "value_1_option_1, value_1_option_2...; value_2_option_1, value_2_option_2..." where "; " separates between which value the options belong to, and ", " separates the options.
 
 /datum/quirk/New(mob/living/quirk_mob, spawn_effects)
 	..()

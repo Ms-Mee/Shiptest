@@ -106,6 +106,7 @@
 /datum/gear/tool/lighter/zippo
 	display_name = "zippo"
 	path = /obj/item/lighter
+	limit = 2
 
 /datum/gear/tool/lighter/clockworkzippo
 	display_name = "Clockwork Zippo"
